@@ -66,7 +66,7 @@ const Sidebar = () => {
               {menuItems.map((item, index) => (
                 <SidebarMenuItem key={index}>
                   <SidebarMenuButton
-                    active={location.pathname === item.path}
+                    isActive={location.pathname === item.path}
                     asChild 
                     tooltip={item.label}
                   >
