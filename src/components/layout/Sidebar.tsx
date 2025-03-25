@@ -93,6 +93,7 @@ const menuItems: MenuItem[] = [
     path: "/records",
     subItems: [
       { label: "Daily Logs", path: "/records/logs" },
+      { label: "DOR Dashboard", path: "/records/dor" },
       { label: "Archives", path: "/records/archives" }
     ] 
   },
