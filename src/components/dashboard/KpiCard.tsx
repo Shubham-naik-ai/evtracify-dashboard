@@ -1,6 +1,7 @@
 
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
+import { TrendingUp, TrendingDown } from "lucide-react";
 
 interface KpiCardProps {
   title: string;
@@ -10,6 +11,8 @@ interface KpiCardProps {
   subtitle?: string;
   subtitleValue?: string | number;
   color?: "blue" | "green" | "yellow" | "red" | "purple" | "indigo";
+  trend?: "up" | "down";
+  trendValue?: string;
 }
 
 const colorClasses = {
@@ -30,6 +33,11 @@ const iconColorClasses = {
   indigo: "bg-indigo-100 text-indigo-700"
 };
 
+const trendColorClasses = {
+  up: "text-green-600 bg-green-50",
+  down: "text-red-600 bg-red-50"
+};
+
 const KpiCard = ({ 
   title, 
   value, 
@@ -37,18 +45,44 @@ const KpiCard = ({
   linkTo, 
   subtitle, 
   subtitleValue,
-  color = "blue" 
+  color = "blue",
+  trend,
+  trendValue
 }: KpiCardProps) => {
   const content = (
-    <div className={`border rounded-lg p-4 relative hover:shadow-md transition-shadow ${colorClasses[color]}`}>
+    <div className={`border rounded-xl p-5 relative hover:shadow-md transition-all duration-300 ${colorClasses[color]}`}>
       <div className="flex justify-between items-start">
         <div>
           <h3 className="text-sm font-medium opacity-80">{title}</h3>
-          <p className="text-2xl font-bold mt-1">{value}</p>
+          <p className="text-2xl font-bold mt-2">{value}</p>
+          
+          {trend && trendValue && (
+            <div className={`inline-flex items-center text-xs font-medium rounded-full px-2 py-0.5 mt-2 ${trendColorClasses[trend]}`}>
+              {trend === 'up' ? (
+                <TrendingUp className="w-3 h-3 mr-1" />
+              ) : (
+                <TrendingDown className="w-3 h-3 mr-1" />
+              )}
+              {trendValue}
+            </div>
+          )}
+          
           {subtitle && (
-            <div className="mt-2 flex items-center">
-              <span className="text-xs opacity-70">{subtitle}:</span>
-              <span className="text-xs font-medium ml-1">{subtitleValue}</span>
+            <div className="mt-2">
+              <div className="flex items-baseline gap-2">
+                <span className="text-xs opacity-70">{subtitle}:</span>
+                <span className="text-xs font-medium">{subtitleValue}</span>
+              </div>
+              <div className="h-1.5 bg-white/50 rounded-full mt-1 overflow-hidden">
+                <div 
+                  className="h-full bg-current rounded-full" 
+                  style={{ 
+                    width: typeof subtitleValue === 'number' && typeof value === 'number' 
+                      ? `${(subtitleValue / value) * 100}%` 
+                      : '10%' 
+                  }}
+                ></div>
+              </div>
             </div>
           )}
         </div>

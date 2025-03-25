@@ -15,8 +15,10 @@ const DashboardLayout = ({ children }: DashboardLayoutProps) => {
         <Sidebar />
         <div className="flex-1 flex flex-col">
           <TopBar />
-          <SidebarInset className="p-4">
-            {children}
+          <SidebarInset className="p-6 overflow-auto">
+            <div className="max-w-7xl mx-auto w-full">
+              {children}
+            </div>
           </SidebarInset>
         </div>
       </div>
