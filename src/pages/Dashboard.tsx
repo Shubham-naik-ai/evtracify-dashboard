@@ -9,7 +9,7 @@ import {
   Route, 
   Users, 
   User, 
-  Tool
+  Wrench
 } from "lucide-react";
 import DashboardLayout from "@/components/layout/DashboardLayout";
 import KpiCard from "@/components/dashboard/KpiCard";
@@ -124,7 +124,7 @@ const Dashboard = () => {
           <KpiCard 
             title="Vehicles Under Maintenance" 
             value="23" 
-            icon={<Tool className="h-5 w-5" />}
+            icon={<Wrench className="h-5 w-5" />}
             linkTo="/maintenance"
             color="red"
           />
